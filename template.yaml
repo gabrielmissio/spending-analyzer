@@ -1,9 +1,9 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  controle-gastos
+  spending-analyzer
 
-  Sample SAM Template for controle-gastos
+  Sample SAM Template for spending-analyzer
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -41,12 +41,24 @@ Resources:
       CodeUri: src/spent/get
       Handler: handler.handler
       Runtime: python3.8
+      Layers:
+        - !Ref dependencies
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /spent/{id}
             Method: get
+
+  dependencies:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: project-dependencies
+      Description: Dependencias
+      ContentUri: dependencies/
+      CompatibleRuntimes:
+        - python3.8
+
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
