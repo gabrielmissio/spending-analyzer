@@ -9,11 +9,19 @@ def mapping_spent(db_result, tag_list):
     payload = json.loads(json.dumps(db_result, default=default))
     result_formatted = {
         'id': (payload['id']),
-        'description': (payload['name']),
+        'description': (payload['description']),
         'value': (payload['value']),
         'inserted_at': (payload['inserted_at']),
         'updated_at': (payload['updated_at']),
         'tags': tag_list
+    }
+
+    return result_formatted
+
+def mapping_spents(list_result):
+    
+    result_formatted = {
+        'spents': list_result
     }
 
     return result_formatted

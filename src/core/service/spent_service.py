@@ -12,9 +12,9 @@ def get_spents(pagenate_by, current_page):
     return result
 
 def create_spent(payload):
+    #to-do: rollback when any operation fail
     payload['updated_at'] = get_date_now()
     payload['inserted_at'] = payload['inserted_at'] if 'inserted_at' in payload else get_date_now()
-    #return get_spends_by_id
     spent_id = spent_repository.create(payload)
     for tag in payload['tags']:
         payload_spent_tag = {}

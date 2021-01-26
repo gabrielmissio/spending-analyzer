@@ -27,7 +27,12 @@ def get_by_id(id):
     raise_errors(["Spend not found"])
 
 def get_all(page):
-    result = 0
+    spents = SpentModel.select().order_by(SpentModel.id)
+    list_results = []
+    for spent in spents:
+        list_results.append(get_by_id(spent))
+
+    result = spent_model_mapping.mapping_spents(list_results)
     return result
 
 def update_by_id(id, payload):

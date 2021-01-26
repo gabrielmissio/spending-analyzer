@@ -55,6 +55,21 @@ Resources:
           Properties:
             Path: /spent/{id}
             Method: get
+  getAllSpents:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/spent/get_all
+      Handler: handler.handler
+      Runtime: python3.8
+      Layers:
+        - !Ref dependencies
+        - !Ref core
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /spent
+            Method: get
 
   dependencies:
     Type: AWS::Serverless::LayerVersion
