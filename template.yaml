@@ -33,7 +33,7 @@ Resources:
         - !Ref dependencies
         - !Ref core
       Events:
-        HelloWorld:
+        createSpent:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /spent
@@ -50,7 +50,7 @@ Resources:
         - !Ref dependencies
         - !Ref core
       Events:
-        HelloWorld:
+        getSpentById:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /spent/{id}
@@ -65,11 +65,26 @@ Resources:
         - !Ref dependencies
         - !Ref core
       Events:
-        HelloWorld:
+        getAllSpents:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /spent
             Method: get
+  updateSpentById:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/spent/update
+      Handler: handler.handler
+      Runtime: python3.8
+      Layers:
+        - !Ref dependencies
+        - !Ref core
+      Events:
+        updateSpentById:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /spent/{id}
+            Method: put
 
   dependencies:
     Type: AWS::Serverless::LayerVersion
