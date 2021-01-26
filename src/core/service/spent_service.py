@@ -21,7 +21,8 @@ def create_spent(payload):
         payload_spent_tag['tag_id'] = tag['tag']
         payload_spent_tag['spent_id'] = spent_id
         spent_tag_repository.create(payload_spent_tag)
-    result = 0
+        
+    result = spent_repository.get_by_id(spent_id)
     return result
 
 def update_spent_by_id(id, payload):
