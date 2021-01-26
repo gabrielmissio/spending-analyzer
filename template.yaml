@@ -34,7 +34,7 @@ Resources:
         - !Ref core
       Events:
         createSpent:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api 
           Properties:
             Path: /spent
             Method: post
@@ -51,7 +51,7 @@ Resources:
         - !Ref core
       Events:
         getSpentById:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api 
           Properties:
             Path: /spent/{id}
             Method: get
@@ -66,7 +66,7 @@ Resources:
         - !Ref core
       Events:
         getAllSpents:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /spent
             Method: get
@@ -81,7 +81,7 @@ Resources:
         - !Ref core
       Events:
         updateSpentById:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api 
           Properties:
             Path: /spent/{id}
             Method: put

@@ -41,4 +41,4 @@ def update_by_id(id, payload):
 
 def delete_by_id(id):
     result = 0
-    return result    
+    return result 

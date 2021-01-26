@@ -26,6 +26,9 @@ def create_spent(payload):
     return result
 
 def update_spent_by_id(id, payload):
+    #delete all associate registers (tags)
+    #create all associate registers (tags)
+    #update spend entity atributs  
     result = spent_repository.update_by_id(id, payload)
     return result
 
