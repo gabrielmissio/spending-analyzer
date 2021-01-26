@@ -14,7 +14,7 @@ def get_spents(pagenate_by, current_page):
 def create_spent(payload):
     payload['updated_at'] = get_date_now()
     payload['inserted_at'] = payload['inserted_at'] if 'inserted_at' in payload else get_date_now()
-    #to-do: insert tags on spent_tag table, return get_spends_by_id
+    #return get_spends_by_id
     spent_id = spent_repository.create(payload)
     for tag in payload['tags']:
         payload_spent_tag = {}
