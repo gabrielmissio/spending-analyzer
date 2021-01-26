@@ -1,0 +1,12 @@
+{
+    "description": "aporte eth",
+    "value": "300",
+    "tags": [
+        {
+            "tag": 1
+        },
+        {
+            "tag": 2
+        }
+    ]
+}

@@ -1,13 +1,11 @@
 from model.peewee.base_model import BaseModel
 import peewee
 
-class SpentModel(BaseModel):
+class TagModel(BaseModel):
 
     class Meta:
-        db_table = 'spent'
+        db_table = 'tag'
 
     id = peewee.BigIntegerField(null=False, unique=True, primary_key=True)
     inserted_at = peewee.DateTimeField(formats=['%Y-%m-%d %H:%M:%S.%f'])
-    updated_at = peewee.DateTimeField(formats=['%Y-%m-%d %H:%M:%S.%f'])
-    description= peewee.CharField(null=False)
-    value= peewee.DoubleField(null=False)
+    name = peewee.CharField(null=False)
