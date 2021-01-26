@@ -1,4 +1,4 @@
-#!/home/linuxbrew/.linuxbrew/opt/python@3.8/bin/python3.8
+#!c:\users\gabriel.missio\appdata\local\programs\python\python38-32\python.exe
 
 import datetime
 import sys

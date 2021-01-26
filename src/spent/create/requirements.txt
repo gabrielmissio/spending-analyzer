@@ -1,1 +1,4 @@
 requests
+peewee
+datetime
+aws-psycopg2

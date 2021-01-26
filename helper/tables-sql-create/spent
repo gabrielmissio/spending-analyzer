@@ -1,0 +1,14 @@
+CREATE TABLE public.spent
+(
+    id bigserial NOT NULL,
+    description character varying(255),
+    inserted_at timestamp with time zone NOT NULL,
+    value double precision NOT NULL,
+    PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE public.spent
+    OWNER to postgres;

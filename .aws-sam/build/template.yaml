@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'spending-analyzer
+
+  Sample SAM Template for spending-analyzer
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: HelloWorldFunction
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+  createSpent:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: createSpent
+      Handler: handler.handler
+      Runtime: python3.8
+      Layers:
+      - Ref: dependencies
+      - Ref: core
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /spent
+            Method: post
+    Metadata:
+      StackeryName: createSpent
+  getSpentById:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: getSpentById
+      Handler: handler.handler
+      Runtime: python3.8
+      Layers:
+      - Ref: dependencies
+      - Ref: core
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /spent/{id}
+            Method: get
+  dependencies:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: project-dependencies
+      Description: Dependencias
+      ContentUri: ..\..\dependencies
+      CompatibleRuntimes:
+      - python3.8
+  core:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: project-core
+      Description: Core
+      ContentUri: ..\..\src\core
+      CompatibleRuntimes:
+      - python3.8
+Outputs:
+  HelloWorldApi:
+    Description: API Gateway endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
+  HelloWorldFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunction
+      - Arn
+  HelloWorldFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunctionRole
+      - Arn
