@@ -13,7 +13,6 @@ def get_spents(pagenate_by, current_page):
     return result
 
 def create_spent(payload):
-    #to-do: rollback when any operation fail
     with db.transaction() as txn:  
         try:
             payload['updated_at'] = get_date_now()
