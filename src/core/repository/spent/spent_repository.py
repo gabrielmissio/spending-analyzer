@@ -36,8 +36,9 @@ def get_all(page):
     return result
 
 def update_by_id(id, payload):
-    result = 0
-    return result
+    query = SpentModel.update(description = payload['description'], value = payload['value'], updated_at = payload['updated_at']).where(SpentModel.id == id)
+    query.execute()  # R
+    return 0
 
 def delete_by_id(id):
     result = 0

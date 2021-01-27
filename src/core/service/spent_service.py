@@ -26,10 +26,16 @@ def create_spent(payload):
     return result
 
 def update_spent_by_id(id, payload):
-    #delete all associate registers (tags)
-    #create all associate registers (tags)
-    #update spend entity atributs  
-    result = spent_repository.update_by_id(id, payload)
+    spent_tag_repository.delete_all_by_spent_id(id)
+    for tag in payload['tags']:
+        payload_spent_tag = {}
+        payload_spent_tag['tag_id'] = tag['tag']
+        payload_spent_tag['spent_id'] = id
+        spent_tag_repository.create(payload_spent_tag)
+    #update spend entity atributs
+    payload['updated_at'] = get_date_now()
+    spent_repository.update_by_id(id, payload)
+    result = spent_repository.get_by_id(id)
     return result
 
 def delete_spent_by_id(id):
