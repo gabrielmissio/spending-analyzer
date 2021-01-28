@@ -85,7 +85,66 @@ Resources:
           Properties:
             Path: /spent/{id}
             Method: put
-
+  createTag:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/tag/create
+      Handler: handler.handler
+      Runtime: python3.8
+      Layers:
+        - !Ref dependencies
+        - !Ref core
+      Events:
+        createTag:
+          Type: Api 
+          Properties:
+            Path: /tag
+            Method: post
+  getTagById:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/tag/get
+      Handler: handler.handler
+      Runtime: python3.8
+      Layers:
+        - !Ref dependencies
+        - !Ref core
+      Events:
+        getTagById:
+          Type: Api 
+          Properties:
+            Path: /tag/{id}
+            Method: get
+  updateTagById:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/tag/update
+      Handler: handler.handler
+      Runtime: python3.8
+      Layers:
+        - !Ref dependencies
+        - !Ref core
+      Events:
+        getTagById:
+          Type: Api 
+          Properties:
+            Path: /tag/{id}
+            Method: put
+  getAllTags:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/tag/get_all
+      Handler: handler.handler
+      Runtime: python3.8
+      Layers:
+        - !Ref dependencies
+        - !Ref core
+      Events:
+        getTagById:
+          Type: Api 
+          Properties:
+            Path: /tag
+            Method: get
   dependencies:
     Type: AWS::Serverless::LayerVersion
     Properties:
