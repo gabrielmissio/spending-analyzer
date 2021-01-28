@@ -8,4 +8,5 @@ class TagModel(BaseModel):
 
     id = peewee.BigIntegerField(null=False, unique=True, primary_key=True)
     inserted_at = peewee.DateTimeField(formats=['%Y-%m-%d %H:%M:%S.%f'])
+    updated_at = peewee.DateTimeField(formats=['%Y-%m-%d %H:%M:%S.%f'])
     name = peewee.CharField(null=False)
