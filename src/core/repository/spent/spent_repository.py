@@ -7,12 +7,12 @@ from utils.validation import raise_errors
 import peewee
 
 def create(payload):
-    spent = SpentModel(description = payload['description'], value = payload['value'], inserted_at = payload['inserted_at'], updated_at = payload['updated_at'])
+    spent = SpentModel(type = payload['type'], description = payload['description'], value = payload['value'], inserted_at = payload['inserted_at'], updated_at = payload['updated_at'])
     spent.save()
     return spent.id
 
 def get_by_id(id):
-    spent_result = SpentModel.select(SpentModel, TagModel, TagModel.id.alias('tag_id')).join(SpentTagModel, peewee.JOIN.LEFT_OUTER, on=(SpentTagModel.spent_id == SpentModel.id)).join(TagModel, peewee.JOIN.LEFT_OUTER, on=(TagModel.id == SpentTagModel.tag_id)).where(SpentModel.id == id).dicts()
+    spent_result = SpentModel.select(SpentModel, TagModel, TagModel.id.alias('tag_id')).join(SpentTagModel, peewee.JOIN.LEFT_OUTER, on=(SpentTagModel.register_id == SpentModel.id)).join(TagModel, peewee.JOIN.LEFT_OUTER, on=(TagModel.id == SpentTagModel.tag_id)).where(SpentModel.id == id).dicts()
     
     tag_list = []
 
@@ -27,16 +27,17 @@ def get_by_id(id):
     raise_errors(["Spend not found"])
 
 def get_all(page):
+    list_result = []
     spents = SpentModel.select().order_by(SpentModel.id)
-    list_results = []
     for spent in spents:
-        list_results.append(get_by_id(spent))
-
-    result = spent_model_mapping.mapping_spents(list_results)
-    return result
+        print(spent)
+        list_result.append(get_by_id(spent))
+    print(list_result)
+    result = 'o que esta havendo'
+    return list_result
 
 def update_by_id(id, payload):
-    query = SpentModel.update(description = payload['description'], value = payload['value'], updated_at = payload['updated_at']).where(SpentModel.id == id)
+    query = SpentModel.update(type = payload['type'], description = payload['description'], value = payload['value'], updated_at = payload['updated_at']).where(SpentModel.id == id)
     query.execute()  # R
     return 0
 
