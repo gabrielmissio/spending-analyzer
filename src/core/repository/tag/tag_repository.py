@@ -15,7 +15,7 @@ def get_by_id(id):
     tag_result = TagModel.select(TagModel.id.alias('tag_id'),TagModel).where(TagModel.id == id).dicts()
 
     if tag_result.exists():
-        return tag_model_mapping.mapping_tag(tag_result[0])#'formata e manda'register_model_mapping.mapping_register(spent_result[0], tag_list)
+        return tag_model_mapping.mapping_tag(tag_result[0])#'formata e manda'register_model_mapping.mapping_register(register_result[0], tag_list)
 
     raise_errors(["Spend not found"])
 

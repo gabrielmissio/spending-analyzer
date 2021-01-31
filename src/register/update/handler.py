@@ -11,7 +11,7 @@ def handler(event, context):
         payload = json.loads(event['body'])
         print(payload)
         register_validation.validate(payload)
-        result = register_service.update_spent_by_id(id, payload)
+        result = register_service.update_register_by_id(id, payload)
         print(result)
         return create_success_body(result)
     except Exception as err:

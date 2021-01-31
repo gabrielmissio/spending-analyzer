@@ -1,0 +1,13 @@
+CREATE TABLE public.register
+(
+    id bigserial NOT NULL,
+    description character varying(255),
+    type character varying(10) NOT NULL,
+    value double precision NOT NULL,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE public.register
+    OWNER to postgres;

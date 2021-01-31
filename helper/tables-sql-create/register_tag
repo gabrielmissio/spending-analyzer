@@ -1,0 +1,19 @@
+CREATE TABLE public.register_tag
+(
+    tag_id bigint NOT NULL,
+    register_id bigint NOT NULL,
+    PRIMARY KEY (tag_id, register_id),
+    CONSTRAINT tag_id_fk FOREIGN KEY (tag_id)
+        REFERENCES public.tag (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT register_id_fk FOREIGN KEY (register_id)
+        REFERENCES public.register (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+);
+
+ALTER TABLE public.register_tag
+    OWNER to postgres;

@@ -1,5 +1,5 @@
 import repository.tag.tag_repository as tag_repository
-import repository.spent.register_tag_repository as register_tag_repository
+import repository.register.register_tag_repository as register_tag_repository
 from utils.date_time import get_date_now
 from model.peewee.base_model import db
 
@@ -32,6 +32,6 @@ def update_tag_by_id(id, payload):
     result = tag_repository.get_by_id(id)
     return result
 
-def delete_spent_by_id(id):
+def delete_register_by_id(id):
     result = tag_repository.delete_by_id(id)
     return result

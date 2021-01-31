@@ -9,7 +9,7 @@ def handler(event, context):
         print(event)
         id = event['pathParameters']['id']
 
-        result = register_service.get_spent_by_id(id)
+        result = register_service.get_register_by_id(id)
         print(result)
         return create_success_body(result)
     except Exception as err:

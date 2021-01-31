@@ -3,7 +3,9 @@
 
 # Ignore Dependencies
 dependencies/
-
+.aws-sam/
+*/build/
+build/
 ### Linux ###
 *~
 

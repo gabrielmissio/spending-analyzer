@@ -1,6 +1,7 @@
 {
     "description": "aporte eth",
     "value": "300",
+    "type": "inflow/outflow",
     "tags": [
         {
             "tag": 1

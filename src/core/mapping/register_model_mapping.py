@@ -21,7 +21,7 @@ def mapping_register(db_result, tag_list):
 def mapping_registers(list_result):
     
     result_formatted = {
-        'register': list_result
+        'registers': list_result
     }
 
     return result_formatted

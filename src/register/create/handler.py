@@ -15,7 +15,7 @@ def handler(event, context):
 
         register_validation.validate(payload)
 
-        result = register_service.create_spent(payload)
+        result = register_service.create_register(payload)
         print(result)
         return create_success_body(result)
     except Exception as err:

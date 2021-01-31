@@ -7,31 +7,31 @@ from utils.validation import raise_errors
 import peewee
 
 def create(payload):
-    spent = RegisterModel(type = payload['type'], description = payload['description'], value = payload['value'], inserted_at = payload['inserted_at'], updated_at = payload['updated_at'])
-    spent.save()
-    return spent.id
+    register = RegisterModel(type = payload['type'], description = payload['description'], value = payload['value'], inserted_at = payload['inserted_at'], updated_at = payload['updated_at'])
+    register.save()
+    return register.id
 
 def get_by_id(id):
-    spent_result = RegisterModel.select(RegisterModel, TagModel, TagModel.id.alias('tag_id')).join(RegisterTagModel, peewee.JOIN.LEFT_OUTER, on=(RegisterTagModel.register_id == RegisterModel.id)).join(TagModel, peewee.JOIN.LEFT_OUTER, on=(TagModel.id == RegisterTagModel.tag_id)).where(RegisterModel.id == id).dicts()
+    register_result = RegisterModel.select(RegisterModel, TagModel, TagModel.id.alias('tag_id')).join(RegisterTagModel, peewee.JOIN.LEFT_OUTER, on=(RegisterTagModel.register_id == RegisterModel.id)).join(TagModel, peewee.JOIN.LEFT_OUTER, on=(TagModel.id == RegisterTagModel.tag_id)).where(RegisterModel.id == id).dicts()
     
     tag_list = []
 
-    for spent in spent_result:
-        tag = tag_model_mapping.mapping_tag(spent)
+    for register in register_result:
+        tag = tag_model_mapping.mapping_tag(register)
         if tag not in tag_list:
             tag_list.append(tag)
 
-    if spent_result.exists():
-        return register_model_mapping.mapping_register(spent_result[0], tag_list)
+    if register_result.exists():
+        return register_model_mapping.mapping_register(register_result[0], tag_list)
 
     raise_errors(["Spend not found"])
 
 def get_all(page):
     list_result = []
-    spents = RegisterModel.select().order_by(RegisterModel.id)
-    for spent in spents:
-        print(spent)
-        list_result.append(get_by_id(spent))
+    registers = RegisterModel.select().order_by(RegisterModel.id)
+    for register in registers:
+        print(register)
+        list_result.append(get_by_id(register))
     print(list_result)
     result = register_model_mapping.mapping_registers(list_result)
     return result
