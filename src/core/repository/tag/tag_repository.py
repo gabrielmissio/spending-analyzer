@@ -1,8 +1,8 @@
-from model.peewee.spent_model import *
-from model.peewee.spent_tag_model import *
+from model.peewee.register_model import *
+from model.peewee.register_tag_model import *
 from model.peewee.tag_model import *
 from mapping import tag_model_mapping as tag_model_mapping
-from mapping import spent_model_mapping as spent_model_mapping
+from mapping import register_model_mapping as register_model_mapping
 from utils.validation import raise_errors
 import peewee
 
@@ -15,7 +15,7 @@ def get_by_id(id):
     tag_result = TagModel.select(TagModel.id.alias('tag_id'),TagModel).where(TagModel.id == id).dicts()
 
     if tag_result.exists():
-        return tag_model_mapping.mapping_tag(tag_result[0])#'formata e manda'spent_model_mapping.mapping_spent(spent_result[0], tag_list)
+        return tag_model_mapping.mapping_tag(tag_result[0])#'formata e manda'register_model_mapping.mapping_register(spent_result[0], tag_list)
 
     raise_errors(["Spend not found"])
 

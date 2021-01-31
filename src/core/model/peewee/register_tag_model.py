@@ -1,7 +1,7 @@
 from model.peewee.base_model import BaseModel
 import peewee
 
-class SpentTagModel(BaseModel):
+class RegisterTagModel(BaseModel):
 
     class Meta:
         db_table = 'register_tag'

@@ -23,67 +23,67 @@ Resources:
           Properties:
             Path: /hello
             Method: get
-  createSpent:
+  createRegister:
     Type: AWS::Serverless::Function 
     Properties:
-      CodeUri: src/spent/create
+      CodeUri: src/register/create
       Handler: handler.handler
       Runtime: python3.8
       Layers:
         - !Ref dependencies
         - !Ref core
       Events:
-        createSpent:
+        createRegister:
           Type: Api 
           Properties:
-            Path: /spent
+            Path: /register
             Method: post
     Metadata:
-      StackeryName: createSpent
-  getSpentById:
+      StackeryName: createRegister
+  getRegisterById:
     Type: AWS::Serverless::Function 
     Properties:
-      CodeUri: src/spent/get
+      CodeUri: src/register/get
       Handler: handler.handler
       Runtime: python3.8
       Layers:
         - !Ref dependencies
         - !Ref core
       Events:
-        getSpentById:
+        getRegisterById:
           Type: Api 
           Properties:
-            Path: /spent/{id}
+            Path: /register/{id}
             Method: get
-  getAllSpents:
+  getAllRegisters:
     Type: AWS::Serverless::Function 
     Properties:
-      CodeUri: src/spent/get_all
+      CodeUri: src/register/get_all
       Handler: handler.handler
       Runtime: python3.8
       Layers:
         - !Ref dependencies
         - !Ref core
       Events:
-        getAllSpents:
+        getAllRegisters:
           Type: Api
           Properties:
-            Path: /spent
+            Path: /register
             Method: get
-  updateSpentById:
+  updateRegisterById:
     Type: AWS::Serverless::Function 
     Properties:
-      CodeUri: src/spent/update
+      CodeUri: src/register/update
       Handler: handler.handler
       Runtime: python3.8
       Layers:
         - !Ref dependencies
         - !Ref core
       Events:
-        updateSpentById:
+        updateRegisterById:
           Type: Api 
           Properties:
-            Path: /spent/{id}
+            Path: /register/{id}
             Method: put
   createTag:
     Type: AWS::Serverless::Function 

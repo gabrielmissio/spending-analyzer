@@ -1,5 +1,5 @@
 import repository.tag.tag_repository as tag_repository
-import repository.spent.spent_tag_repository as spent_tag_repository
+import repository.spent.register_tag_repository as register_tag_repository
 from utils.date_time import get_date_now
 from model.peewee.base_model import db
 

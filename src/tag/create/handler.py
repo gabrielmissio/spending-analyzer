@@ -12,7 +12,7 @@ def handler(event, context):
         payload = json.loads(event['body'])
         print(payload)
 
-        #spent_validation.validate(payload)
+        #register_validation.validate(payload)
 
         result = tag_service.create_tag(payload)
         print(result)
