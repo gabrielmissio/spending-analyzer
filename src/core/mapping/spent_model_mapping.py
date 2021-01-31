@@ -21,7 +21,7 @@ def mapping_spent(db_result, tag_list):
 def mapping_spents(list_result):
     
     result_formatted = {
-        'spents': list_result
+        'register': list_result
     }
 
     return result_formatted

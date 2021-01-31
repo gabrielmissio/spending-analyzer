@@ -33,8 +33,8 @@ def get_all(page):
         print(spent)
         list_result.append(get_by_id(spent))
     print(list_result)
-    result = 'o que esta havendo'
-    return list_result
+    result = spent_model_mapping.mapping_spents(list_result)
+    return result
 
 def update_by_id(id, payload):
     query = SpentModel.update(type = payload['type'], description = payload['description'], value = payload['value'], updated_at = payload['updated_at']).where(SpentModel.id == id)
