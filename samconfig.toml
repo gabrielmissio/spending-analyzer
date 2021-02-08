@@ -3,8 +3,8 @@ version = 0.1
 [default.deploy]
 [default.deploy.parameters]
 stack_name = "sam-app"
-s3_bucket = "arn:aws:s3:::bucket-teste-uploading"
-s3_prefix = "sam-app"
+s3_bucket = "spending-analyzer"
+s3_prefix = "spending-analyzer"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"

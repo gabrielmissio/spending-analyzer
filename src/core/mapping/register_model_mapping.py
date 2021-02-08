@@ -9,6 +9,7 @@ def mapping_register(db_result, tag_list):
     payload = json.loads(json.dumps(db_result, default=default))
     result_formatted = {
         'id': (payload['id']),
+        'type': (payload['type']),
         'description': (payload['description']),
         'value': (payload['value']),
         'inserted_at': (payload['inserted_at']),
