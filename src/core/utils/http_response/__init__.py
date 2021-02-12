@@ -8,7 +8,7 @@ def default(o):
 def create_success_body(data):
     result = {}
     result["statusCode"] = 200
-    result["headers"] = {}
+    result["headers"] = {'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'OPTIONS,POST,GET'}
     result["body"] = json.dumps(data, default=default) if not data is None else None
     return result
 
