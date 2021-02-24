@@ -5,6 +5,10 @@ Resources:
   api:
     Type: AWS::Serverless::Api
     Properties:
+      Cors:
+        AllowMethods: "'POST, GET'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
       BinaryMediaTypes:
         - multipart~1form-data
       Name: !Sub
@@ -24,6 +28,12 @@ Resources:
                 httpMethod: POST
                 type: aws_proxy
                 uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${getAllRegisters.Arn}/invocations
+              responses: {}
+            post:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${createRegister.Arn}/invocations
               responses: {}
           
   getAllRegisters:
@@ -51,6 +61,31 @@ Resources:
             RestApiId: !Ref api
     Metadata:
       StackeryName: getAllRegisters
+  createRegister:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-createRegister
+      Description: !Sub
+        - Stackery Stack ${StackeryStackTagName} Environment ${StackeryEnvironmentTagName} Function ${ResourceName}
+        - ResourceName: createRegister
+      CodeUri: src/register/create
+      Handler: handler.handler
+      Runtime: python3.8
+      Timeout: 30
+      Tracing: Active
+      Layers:
+        - !Ref core
+      Policies:
+        - AmazonRDSDataFullAccess
+      Events:
+        apiCreateRegister:
+          Type: Api
+          Properties:                            
+            Path: /register
+            Method: POST
+            RestApiId: !Ref api
+    Metadata:
+      StackeryName: createRegister
   core:
     Type: AWS::Serverless::LayerVersion
     Properties:

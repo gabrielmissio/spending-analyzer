@@ -38,7 +38,7 @@ def get_all(page):
 
 def update_by_id(id, payload):
     query = RegisterModel.update(type = payload['type'], description = payload['description'], value = payload['value'], updated_at = payload['updated_at']).where(RegisterModel.id == id)
-    query.execute()  # R
+    query.execute()  # 
     return 0
 
 def delete_by_id(id):

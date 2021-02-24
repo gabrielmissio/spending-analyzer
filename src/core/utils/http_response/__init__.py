@@ -8,7 +8,7 @@ def default(o):
 def create_success_body(data):
     result = {}
     result["statusCode"] = 200
-    result["headers"] = {'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'OPTIONS,POST,GET'}
+    result["headers"] = {'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': '*'}
     result["body"] = json.dumps(data, default=default) if not data is None else None
     return result
 
@@ -20,7 +20,7 @@ def create_error_body(data):
     body["message"] = data.args[0]
     result = {}
     result["statusCode"] = status_code
-    result["headers"] = {}
+    result["headers"] = {'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': '*'}
     result["body"] = json.dumps(body)
     
     return result
