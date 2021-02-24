@@ -30,7 +30,7 @@ def get_all(page):
 
 def update_by_id(id, payload):
     query = TagModel.update(name = payload['name'], updated_at = payload['updated_at']).where(TagModel.id == id)
-    query.execute()  # R
+    query.execute()
     return 0
 
 def delete_by_id(id):

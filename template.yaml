@@ -35,6 +35,13 @@ Resources:
                 type: aws_proxy
                 uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${createRegister.Arn}/invocations
               responses: {}
+          /tag:
+            get:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${getAlltags.Arn}/invocations
+              responses: {}
           
   getAllRegisters:
     Type: AWS::Serverless::Function
@@ -86,6 +93,31 @@ Resources:
             RestApiId: !Ref api
     Metadata:
       StackeryName: createRegister
+  getAlltags:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-getAlltags
+      Description: !Sub
+        - Stackery Stack ${StackeryStackTagName} Environment ${StackeryEnvironmentTagName} Function ${ResourceName}
+        - ResourceName: getAlltags
+      CodeUri: src/tag/get_all
+      Handler: handler.handler
+      Runtime: python3.8
+      Timeout: 60
+      Tracing: Active
+      Layers:
+        - !Ref core
+      Policies:
+        - AmazonRDSDataFullAccess
+      Events:
+        apiGetAlltags:
+          Type: Api
+          Properties:                            
+            Path: /tag
+            Method: GET
+            RestApiId: !Ref api
+    Metadata:
+      StackeryName: getAlltags
   core:
     Type: AWS::Serverless::LayerVersion
     Properties:
