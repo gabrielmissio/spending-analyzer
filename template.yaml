@@ -42,6 +42,12 @@ Resources:
                 type: aws_proxy
                 uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${getAlltags.Arn}/invocations
               responses: {}
+            post:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${createTag.Arn}/invocations
+              responses: {}
           
   getAllRegisters:
     Type: AWS::Serverless::Function
@@ -118,6 +124,31 @@ Resources:
             RestApiId: !Ref api
     Metadata:
       StackeryName: getAlltags
+  createTag:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-createTag
+      Description: !Sub
+        - Stackery Stack ${StackeryStackTagName} Environment ${StackeryEnvironmentTagName} Function ${ResourceName}
+        - ResourceName: createTag
+      CodeUri: src/tag/create
+      Handler: handler.handler
+      Runtime: python3.8
+      Timeout: 60
+      Tracing: Active
+      Layers:
+        - !Ref core
+      Policies:
+        - AmazonRDSDataFullAccess
+      Events:
+        apiCreateTag:
+          Type: Api
+          Properties:                            
+            Path: /tag
+            Method: POST
+            RestApiId: !Ref api
+    Metadata:
+      StackeryName: createTag
   core:
     Type: AWS::Serverless::LayerVersion
     Properties:
