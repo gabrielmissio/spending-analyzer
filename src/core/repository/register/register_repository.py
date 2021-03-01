@@ -26,14 +26,17 @@ def get_by_id(id):
 
     raise_errors(["Spend not found"])
 
-def get_all(page):
+def get_all(pagination):
     list_result = []
-    registers = RegisterModel.select().order_by(RegisterModel.id)
+    registers = RegisterModel.select().order_by(RegisterModel.id).paginate(pagination.get_current_page(), pagination.get_paginate_by())
+
+    pagination.set_all_rows(count_register())
+
     for register in registers:
         print(register)
         list_result.append(get_by_id(register))
     print(list_result)
-    result = register_model_mapping.mapping_registers(list_result)
+    result = register_model_mapping.mapping_registers(list_result, pagination)
     return result
 
 def update_by_id(id, payload):
@@ -44,3 +47,8 @@ def update_by_id(id, payload):
 def delete_by_id(id):
     result = 0
     return result 
+
+
+def count_register():#to-do: to implement filter
+    total_registers = RegisterModel.select().order_by(RegisterModel.id).count()
+    return  total_registers

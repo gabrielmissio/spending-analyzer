@@ -2,14 +2,17 @@ import repository.register.register_repository as register_repository
 import repository.register.register_tag_repository as register_tag_repository
 from utils.date_time import get_date_now
 from model.peewee.base_model import db
+from utils.pagination.page import *
+
 
 def get_register_by_id(id):
     result = register_repository.get_by_id(id)
     return result
 
-def get_registers(pagenate_by, current_page):
-    page = 0
-    result = register_repository.get_all(page)
+def get_registers(current_page, paginate_by):
+    url = '/register'
+    pagination = Page(current_page, paginate_by, url)
+    result = register_repository.get_all(pagination)
     return result
 
 def create_register(payload):
