@@ -2,14 +2,17 @@ import repository.tag.tag_repository as tag_repository
 import repository.register.register_tag_repository as register_tag_repository
 from utils.date_time import get_date_now
 from model.peewee.base_model import db
+from utils.pagination.page import *
+
 
 def get_tag_by_id(id):
     result = tag_repository.get_by_id(id)
     return result
 
-def get_tags(pagenate_by, current_page):
-    page = 0
-    result = tag_repository.get_all(page)
+def get_tags(current_page, paginate_by):
+    url = '/tag'
+    pagination = Page(current_page, paginate_by, url)
+    result = tag_repository.get_all(pagination)
     return result
 
 def create_tag(payload):

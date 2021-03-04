@@ -26,7 +26,7 @@ def mapping_registers(list_result, page):
         'metadata': {
             'current_page': page.get_current_page(),
             'total_pages': page.get_page_count(),
-            'total_rows()': page.get_all_rows(),
+            'total_rows': page.get_all_rows(),
             'next_page': page.get_next_page(),
             'previous_page': page.get_previous_page()
         }

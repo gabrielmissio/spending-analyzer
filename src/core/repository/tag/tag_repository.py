@@ -19,13 +19,16 @@ def get_by_id(id):
 
     raise_errors(["Spend not found"])
 
-def get_all(page):
-    tags = TagModel.select().order_by(TagModel.id)
+def get_all(pagination):
+    tags = TagModel.select().order_by(TagModel.id).paginate(pagination.get_current_page(), pagination.get_paginate_by())
     list_results = []
+
+    pagination.set_all_rows(count_tag())
+
     for tag in tags:
         list_results.append(get_by_id(tag))
 
-    result = tag_model_mapping.mapping_tags(list_results)
+    result = tag_model_mapping.mapping_tags(list_results, pagination)
     return result
 
 def update_by_id(id, payload):
@@ -36,3 +39,7 @@ def update_by_id(id, payload):
 def delete_by_id(id):
     result = 0
     return result 
+
+def count_tag():#to-do: to implement filter
+    total_tags = TagModel.select().order_by(TagModel.id).count()
+    return  total_tags

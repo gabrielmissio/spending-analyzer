@@ -14,9 +14,16 @@ def mapping_tag(db_result):
 
     return result_formatted
 
-def mapping_tags(list_result):
+def mapping_tags(list_result, page):
     result_formatted = {
-        "tags": list_result
+        "tags": list_result,
+        'metadata': {
+            'current_page': page.get_current_page(),
+            'total_pages': page.get_page_count(),
+            'total_rows': page.get_all_rows(),
+            'next_page': page.get_next_page(),
+            'previous_page': page.get_previous_page()
+        }
     }
 
     return result_formatted
